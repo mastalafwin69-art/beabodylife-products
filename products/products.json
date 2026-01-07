@@ -1,0 +1,35 @@
+{
+  "last_updated": "2024-01-15",
+  "affiliate_tag": "beaubodylife-20",
+  "products": [
+    {
+      "id": "yoga-mat-premium",
+      "name": "Premium Yoga Mat - Non Slip",
+      "category": "fitness",
+      "price": 49.99,
+      "original_price": 69.99,
+      "rating": 4.8,
+      "reviews": 1245,
+      "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+      "amazon_asin": "B08XYZ1234",
+      "description": "Extra thick non-slip yoga mat",
+      "prime": true,
+      "in_stock": true,
+      "badge": "Sale"
+    },
+    {
+      "id": "vitamin-c-serum",
+      "name": "Vitamin C Serum for Face",
+      "category": "skincare",
+      "price": 38.00,
+      "rating": 4.9,
+      "reviews": 2890,
+      "image": "https://images.unsplash.com/photo-1556228578-9c360e1d4588?w=400&h=300&fit=crop",
+      "amazon_asin": "B08ABC5678",
+      "description": "Anti-aging vitamin C serum",
+      "prime": true,
+      "in_stock": true,
+      "badge": "Bestseller"
+    }
+  ]
+}
