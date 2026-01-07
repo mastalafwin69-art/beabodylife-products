@@ -1,0 +1,53 @@
+{
+  "products": [
+    {
+      "id": "prod-001",
+      "name": "Premium Yoga Mat - Non Slip Exercise Mat",
+      "category": "fitness",
+      "price": 49.99,
+      "originalPrice": 69.99,
+      "rating": 4.8,
+      "reviews": 1245,
+      "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
+      "amazonUrl": "https://www.amazon.com/dp/B08XYZ1234",
+      "badge": "Sale",
+      "prime": true
+    },
+    {
+      "id": "prod-002",
+      "name": "Vitamin C Serum for Face - Anti Aging Serum",
+      "category": "skincare",
+      "price": 38.00,
+      "rating": 4.9,
+      "reviews": 2890,
+      "image": "https://images.unsplash.com/photo-1556228578-9c360e1d4588?w=400&h=300&fit=crop",
+      "amazonUrl": "https://www.amazon.com/dp/B08ABC5678",
+      "badge": "New",
+      "prime": true
+    },
+    {
+      "id": "prod-003",
+      "name": "14K Gold Pendant Necklace for Women",
+      "category": "jewelry",
+      "price": 89.00,
+      "originalPrice": 120.00,
+      "rating": 4.7,
+      "reviews": 856,
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w-400&h=300&fit=crop",
+      "amazonUrl": "https://www.amazon.com/dp/B08DEF9012",
+      "badge": "Sale",
+      "prime": true
+    },
+    {
+      "id": "prod-004",
+      "name": "Smart Fitness Tracker Watch - Heart Rate Monitor",
+      "category": "watches",
+      "price": 249.00,
+      "rating": 4.6,
+      "reviews": 3120,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop",
+      "amazonUrl": "https://www.amazon.com/dp/B08GHI3456",
+      "prime": true
+    }
+  ]
+}
