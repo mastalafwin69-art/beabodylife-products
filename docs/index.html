@@ -6,121 +6,188 @@
                 <p class="text-gray-600 mb-6">Hand-picked wellness products available on Amazon. We earn from qualifying purchases.</p>
                 <div class="inline-flex items-center bg-yellow-50 border border-yellow-200 rounded-full px-4 py-2">
                     <i class="fab fa-amazon text-yellow-600 mr-2"></i>
-                    <span class="text-sm text-yellow-800">Amazon Affiliate Disclosure</span>
+                    <span class="text-sm text-yellow-800">Amazon Associates Disclosure</span>
                 </div>
             </div>
 
-            <!-- Product Filters -->
-            <div class="flex flex-wrap justify-center gap-4 mb-10">
-                <button class="px-4 py-2 bg-pink-600 text-white rounded-full font-medium filter-btn active" data-filter="all">All Products</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium filter-btn" data-filter="fitness">Fitness</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium filter-btn" data-filter="skincare">Skincare</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium filter-btn" data-filter="jewelry">Jewelry</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium filter-btn" data-filter="watches">Watches</button>
-            </div>
-
-            <!-- Dynamic Products Grid -->
+            <!-- Live Products Grid -->
             <div id="amazon-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Products will be loaded dynamically from GitHub JSON -->
-                <div class="text-center py-12">
+                <!-- Products loaded dynamically from GitHub -->
+                <div class="text-center py-12 col-span-4">
                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600 mx-auto"></div>
-                    <p class="mt-4 text-gray-600">Loading Amazon products...</p>
+                    <p class="mt-4 text-gray-600">Loading products from GitHub...</p>
                 </div>
             </div>
 
-            <!-- GitHub Repository Integration -->
+            <!-- GitHub Repository Status -->
             <div class="mt-16 p-6 bg-gray-50 rounded-xl">
                 <div class="flex flex-col md:flex-row items-center justify-between">
                     <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Open Source Product Manager</h3>
-                        <p class="text-gray-600 mb-4 md:mb-0">This product showcase is powered by our GitHub repository. Easily update products via JSON files.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Live Product Management</h3>
+                        <p class="text-gray-600 mb-4 md:mb-0">
+                            Products managed via 
+                            <a href="https://github.com/mastalafwin69-art/beabodylife-products" target="_blank" class="text-pink-600 hover:underline font-medium">
+                                GitHub Repository
+                            </a>
+                        </p>
                     </div>
-                    <a href="https://github.com/yourusername/beabodylife-products" target="_blank" class="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
-                        <i class="fab fa-github mr-3"></i>
-                        View on GitHub
-                    </a>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/mastalafwin69-art/beabodylife-products/edit/main/products.json" target="_blank" class="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+                            <i class="fas fa-edit mr-3"></i>
+                            Edit Products
+                        </a>
+                        <a href="https://github.com/mastalafwin69-art/beabodylife-products/blob/main/products.json" target="_blank" class="inline-flex items-center border border-gray-900 text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-900 hover:text-white transition">
+                            <i class="fas fa-code mr-3"></i>
+                            View JSON
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Product Stats -->
+                <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-pink-600" id="total-products">0</div>
+                        <div class="text-gray-600 text-sm">Total Products</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="in-stock">0</div>
+                        <div class="text-gray-600 text-sm">In Stock</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="prime-products">0</div>
+                        <div class="text-gray-600 text-sm">Prime Eligible</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600" id="avg-rating">0.0</div>
+                        <div class="text-gray-600 text-sm">Avg Rating</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GitHub Integration Script -->
+    <!-- GitHub Products Loader Script -->
     <script>
-        // GitHub Repository Configuration
-        const GITHUB_USERNAME = 'yourusername'; // Replace with your GitHub username
+        // Configuration
+        const GITHUB_USERNAME = 'mastalafwin69-art';
         const REPO_NAME = 'beabodylife-products';
         const PRODUCTS_JSON_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/products.json`;
         
-        // Amazon Affiliate Tag (Replace with your actual tag)
-        const AMAZON_AFFILIATE_TAG = 'beabodylife-20';
-        
-        // Load products from GitHub
-        async function loadAmazonProducts() {
+        // Load and display products
+        async function loadProducts() {
             try {
                 const response = await fetch(PRODUCTS_JSON_URL);
-                const products = await response.json();
+                const data = await response.json();
                 
-                const productsGrid = document.getElementById('amazon-products');
-                productsGrid.innerHTML = '';
-                
-                products.forEach(product => {
-                    const productCard = createProductCard(product);
-                    productsGrid.appendChild(productCard);
-                });
-                
-                initializeFilters();
+                displayProducts(data.products);
+                updateStats(data.products);
             } catch (error) {
                 console.error('Error loading products:', error);
                 document.getElementById('amazon-products').innerHTML = `
                     <div class="col-span-4 text-center py-12">
                         <i class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Products Loading Failed</h3>
-                        <p class="text-gray-600">Check your GitHub repository configuration.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Unable to Load Products</h3>
+                        <p class="text-gray-600 mb-4">Check your GitHub repository configuration.</p>
+                        <a href="https://github.com/mastalafwin69-art/beabodylife-products" target="_blank" class="inline-flex items-center bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition">
+                            <i class="fab fa-github mr-2"></i>
+                            Go to GitHub Repository
+                        </a>
                     </div>
                 `;
             }
         }
         
+        function displayProducts(products) {
+            const container = document.getElementById('amazon-products');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+        
         function createProductCard(product) {
             const card = document.createElement('div');
-            card.className = `product-card bg-white rounded-xl overflow-hidden shadow-sm product-item ${product.category}`;
+            card.className = 'product-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300';
             
-            // Add affiliate tracking to Amazon URL
-            const affiliateUrl = product.amazonUrl.includes('?') 
-                ? `${product.amazonUrl}&tag=${AMAZON_AFFILIATE_TAG}`
-                : `${product.amazonUrl}?tag=${AMAZON_AFFILIATE_TAG}`;
+            // Generate Amazon affiliate link
+            const affiliateUrl = `https://www.amazon.com/dp/${product.amazon_asin}?tag=${product.affiliate_tag || 'beabodylife-20'}`;
+            
+            // Generate star rating HTML
+            const starRating = generateStarRating(product.rating);
             
             card.innerHTML = `
                 <div class="relative">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" loading="lazy">
-                    ${product.badge ? `<div class="absolute top-3 left-3 ${product.badge === 'New' ? 'bg-green-500' : 'bg-pink-600'} text-white text-xs font-bold px-2 py-1 rounded">${product.badge}</div>` : ''}
-                    ${product.prime ? `<div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">Prime</div>` : ''}
-                </div>
-                <div class="p-4">
-                    <span class="text-xs text-gray-500 font-medium">${product.category.toUpperCase()}</span>
-                    <h4 class="font-semibold text-gray-900 mt-1 line-clamp-2 h-12">${product.name}</h4>
+                    <img src="${product.image}" alt="${product.name}" 
+                         class="w-full h-48 object-cover" 
+                         loading="lazy"
+                         onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop'">
                     
-                    <div class="flex items-center mt-2">
-                        <div class="star-rating">
-                            ${generateStarRating(product.rating)}
-                        </div>
-                        <span class="text-gray-600 text-sm ml-2">${product.rating}</span>
-                        <span class="text-gray-400 text-sm ml-2">(${product.reviews} reviews)</span>
+                    ${product.badge ? `
+                    <div class="absolute top-3 left-3 ${getBadgeColor(product.badge)} text-white text-xs font-bold px-2 py-1 rounded">
+                        ${product.badge}
+                    </div>` : ''}
+                    
+                    ${product.prime ? `
+                    <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+                        <i class="fab fa-amazon mr-1"></i> Prime
+                    </div>` : ''}
+                    
+                    ${!product.in_stock ? `
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <span class="bg-red-500 text-white px-3 py-1 rounded font-bold">Out of Stock</span>
+                    </div>` : ''}
+                </div>
+                
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs text-gray-500 font-medium uppercase">${product.category}</span>
+                        ${product.in_stock ? `
+                        <span class="text-xs text-green-600 font-medium">
+                            <i class="fas fa-check-circle mr-1"></i> In Stock
+                        </span>` : `
+                        <span class="text-xs text-red-600 font-medium">
+                            <i class="fas fa-times-circle mr-1"></i> Out of Stock
+                        </span>`}
                     </div>
                     
-                    <div class="flex items-center justify-between mt-3">
+                    <h4 class="font-semibold text-gray-900 mb-2 line-clamp-2" title="${product.name}">
+                        ${product.name}
+                    </h4>
+                    
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
+                    
+                    <div class="flex items-center mb-3">
+                        <div class="star-rating mr-2">
+                            ${starRating}
+                        </div>
+                        <span class="text-gray-600 text-sm">${product.rating}</span>
+                        <span class="text-gray-400 text-sm ml-2">(${product.reviews.toLocaleString()})</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
                         <div>
                             <span class="text-pink-600 font-bold text-lg">$${product.price.toFixed(2)}</span>
-                            ${product.originalPrice ? `<span class="text-gray-400 text-sm line-through ml-2">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                            ${product.original_price ? `
+                            <span class="text-gray-400 text-sm line-through ml-2">$${product.original_price.toFixed(2)}</span>
+                            ` : ''}
                         </div>
-                        <a href="${affiliateUrl}" target="_blank" class="bg-pink-600 text-white p-2 rounded-full hover:bg-pink-700 transition" onclick="trackAmazonClick('${product.id}')">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
                     </div>
                     
-                    <a href="${affiliateUrl}" target="_blank" class="block mt-4 text-center bg-yellow-500 text-yellow-900 hover:bg-yellow-600 py-2 rounded-lg font-medium transition" onclick="trackAmazonClick('${product.id}')">
-                        <i class="fab fa-amazon mr-2"></i>View on Amazon
-                    </a>
+                    <div class="space-y-2">
+                        <a href="${affiliateUrl}" 
+                           target="_blank" 
+                           class="block w-full bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-semibold py-3 rounded-lg text-center transition"
+                           onclick="trackProductClick('${product.id}')">
+                            <i class="fab fa-amazon mr-2"></i> View on Amazon
+                        </a>
+                        
+                        <button onclick="showProductDetails('${product.id}')" 
+                                class="block w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg text-center transition">
+                            <i class="fas fa-info-circle mr-2"></i> Details
+                        </button>
+                    </div>
                 </div>
             `;
             
@@ -128,121 +195,68 @@
         }
         
         function generateStarRating(rating) {
-            let stars = '';
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
             
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
+            for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+            if (hasHalfStar) stars += '<i class="fas fa-star-half-alt"></i>';
             
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
+            for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
             
             return stars;
         }
         
-        function initializeFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const productItems = document.querySelectorAll('.product-item');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active', 'bg-pink-600', 'text-white'));
-                    filterButtons.forEach(btn => btn.classList.add('bg-gray-100', 'text-gray-700'));
-                    
-                    // Add active class to clicked button
-                    button.classList.add('active', 'bg-pink-600', 'text-white');
-                    button.classList.remove('bg-gray-100', 'text-gray-700');
-                    
-                    const filterValue = button.getAttribute('data-filter');
-                    
-                    productItems.forEach(item => {
-                        if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-            });
+        function getBadgeColor(badge) {
+            const colors = {
+                'Sale': 'bg-pink-600',
+                'New': 'bg-green-500',
+                'Bestseller': 'bg-orange-500',
+                'Limited': 'bg-purple-600'
+            };
+            return colors[badge] || 'bg-gray-600';
         }
         
-        // Track Amazon clicks for analytics
-        function trackAmazonClick(productId) {
-            // You can integrate with Google Analytics or your own tracking
-            console.log(`Amazon product clicked: ${productId}`);
+        function updateStats(products) {
+            document.getElementById('total-products').textContent = products.length;
+            document.getElementById('in-stock').textContent = products.filter(p => p.in_stock).length;
+            document.getElementById('prime-products').textContent = products.filter(p => p.prime).length;
             
-            // Example: Send to Google Analytics
+            const avgRating = products.reduce((sum, p) => sum + p.rating, 0) / products.length;
+            document.getElementById('avg-rating').textContent = avgRating.toFixed(1);
+        }
+        
+        function trackProductClick(productId) {
+            // Implement analytics tracking here
+            console.log(`Product clicked: ${productId}`);
+            
+            // Example: Google Analytics
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'amazon_click', {
-                    'event_category': 'Affiliate',
-                    'event_label': productId
+                gtag('event', 'select_item', {
+                    items: [{
+                        item_id: productId,
+                        item_name: productId
+                    }]
                 });
             }
         }
         
+        function showProductDetails(productId) {
+            // Implement modal or details view
+            alert(`Product ID: ${productId}\nMore details coming soon!`);
+        }
+        
         // Load products when page loads
-        document.addEventListener('DOMContentLoaded', loadAmazonProducts);
+        document.addEventListener('DOMContentLoaded', loadProducts);
     </script>
 
-    <!-- GitHub Repository Setup Instructions -->
-    <section class="py-12 bg-gray-900 text-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-8">How to Manage Your Products</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fab fa-github text-2xl"></i>
-                    </div>
-                    <h4 class="font-semibold mb-2">1. Fork GitHub Repository</h4>
-                    <p class="text-gray-400 text-sm">Fork our product management template on GitHub</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-code text-2xl"></i>
-                    </div>
-                    <h4 class="font-semibold mb-2">2. Edit products.json</h4>
-                    <p class="text-gray-400 text-sm">Update the JSON file with your Amazon affiliate products</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-sync-alt text-2xl"></i>
-                    </div>
-                    <h4 class="font-semibold mb-2">3. Automatic Updates</h4>
-                    <p class="text-gray-400 text-sm">Your website updates automatically from GitHub</p>
-                </div>
-            </div>
-            
-            <div class="mt-10 text-center">
-                <a href="https://github.com/yourusername/beabodylife-products" target="_blank" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition mr-4">
-                    <i class="fab fa-github mr-2"></i>
-                    Get Repository Template
-                </a>
-                <a href="https://github.com/yourusername/beabodylife-products/blob/main/products.json" target="_blank" class="inline-flex items-center border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition">
-                    <i class="fas fa-file-code mr-2"></i>
-                    View JSON Example
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Required Font Awesome for Amazon icon -->
+    <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css">
 
     <style>
-        /* Additional styles for Amazon integration */
+        /* Additional styles */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -250,19 +264,15 @@
             overflow: hidden;
         }
         
-        .product-item {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .product-card {
+            transition: all 0.3s ease;
         }
         
-        .product-item:hover {
+        .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .filter-btn.active {
-            background-color: #db2777 !important;
-            color: white !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
     </style>
+
 </body>
 </html>
