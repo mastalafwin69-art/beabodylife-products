@@ -1,136 +1,288 @@
-    <!-- Amazon Affiliate Products Showcase -->
-    <section class="py-16 bg-white">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beabodylife | Amazon Affiliate Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .amazon-btn {
+            background: linear-gradient(to bottom, #FFD814, #F7CA00);
+            color: #0F1111;
+            border: 1px solid #FCD200;
+        }
+        .amazon-btn:hover {
+            background: linear-gradient(to bottom, #F7CA00, #F2C200);
+        }
+        .prime-badge {
+            background: linear-gradient(to right, #00A8E1, #146EB4);
+            color: white;
+        }
+        .price-drop {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { background-color: #fef3c7; }
+            50% { background-color: #fde68a; }
+            100% { background-color: #fef3c7; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Amazon Affiliate Banner -->
+    <div class="bg-yellow-50 border-b border-yellow-200 py-3 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-2 md:mb-0">
+                    <i class="fab fa-amazon text-yellow-600 text-xl mr-3"></i>
+                    <div>
+                        <span class="font-bold text-gray-900">Amazon Associates Store</span>
+                        <span class="text-sm text-gray-600 ml-2">ID: <code class="bg-yellow-100 px-2 py-1 rounded">beaubodylife-20</code></span>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <i class="fas fa-sync-alt mr-1"></i>
+                    Prices update automatically
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full"></div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Beabodylife</h1>
+                        <p class="text-xs text-gray-500">Premium Amazon Products</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#products" class="text-gray-700 hover:text-pink-600">Products</a>
+                    <a href="#about" class="text-gray-700 hover:text-pink-600">About</a>
+                    <button onclick="refreshProducts()" class="text-gray-700 hover:text-pink-600">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-pink-50 to-purple-50 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Smart Amazon Shopping
+                <span class="block text-2xl text-pink-600 mt-2">Powered by beaubodylife-20</span>
+            </h1>
+            <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                We track prices and find the best deals on premium wellness products.
+                All purchases support our site through Amazon Associates.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#products" class="bg-pink-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-pink-700">
+                    View Products
+                </a>
+                <a href="https://www.amazon.com" target="_blank" class="amazon-btn px-8 py-3 rounded-lg font-bold">
+                    <i class="fab fa-amazon mr-2"></i> Shop Amazon
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Products Section -->
+    <section id="products" class="py-16">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Amazon Products</h2>
-                <p class="text-gray-600 mb-6">Hand-picked wellness products available on Amazon. We earn from qualifying purchases.</p>
-                <div class="inline-flex items-center bg-yellow-50 border border-yellow-200 rounded-full px-4 py-2">
-                    <i class="fab fa-amazon text-yellow-600 mr-2"></i>
-                    <span class="text-sm text-yellow-800">Amazon Associates Disclosure</span>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">🛍️ Live Product Feed</h2>
+                <p class="text-gray-600 mb-2">Automatically loaded from GitHub</p>
+                <div class="inline-flex items-center bg-green-50 text-green-800 px-4 py-2 rounded-full">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm">Live Updates Active</span>
                 </div>
             </div>
 
-            <!-- Live Products Grid -->
-            <div id="amazon-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Products loaded dynamically from GitHub -->
+            <!-- Products Grid -->
+            <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will load here -->
                 <div class="text-center py-12 col-span-4">
                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600 mx-auto"></div>
                     <p class="mt-4 text-gray-600">Loading products from GitHub...</p>
                 </div>
             </div>
 
-            <!-- GitHub Repository Status -->
-            <div class="mt-16 p-6 bg-gray-50 rounded-xl">
-                <div class="flex flex-col md:flex-row items-center justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Live Product Management</h3>
-                        <p class="text-gray-600 mb-4 md:mb-0">
-                            Products managed via 
-                            <a href="https://github.com/mastalafwin69-art/beabodylife-products" target="_blank" class="text-pink-600 hover:underline font-medium">
-                                GitHub Repository
-                            </a>
-                        </p>
-                    </div>
-                    <div class="flex space-x-4">
-                        <a href="https://github.com/mastalafwin69-art/beabodylife-products/edit/main/products.json" target="_blank" class="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
-                            <i class="fas fa-edit mr-3"></i>
-                            Edit Products
-                        </a>
-                        <a href="https://github.com/mastalafwin69-art/beabodylife-products/blob/main/products.json" target="_blank" class="inline-flex items-center border border-gray-900 text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-900 hover:text-white transition">
-                            <i class="fas fa-code mr-3"></i>
-                            View JSON
-                        </a>
-                    </div>
+            <!-- Stats -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                    <div class="text-3xl font-bold text-pink-600" id="total-products">0</div>
+                    <div class="text-gray-600">Total Products</div>
                 </div>
-                
-                <!-- Product Stats -->
-                <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div class="bg-white p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-pink-600" id="total-products">0</div>
-                        <div class="text-gray-600 text-sm">Total Products</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600" id="in-stock">0</div>
-                        <div class="text-gray-600 text-sm">In Stock</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-blue-600" id="prime-products">0</div>
-                        <div class="text-gray-600 text-sm">Prime Eligible</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-yellow-600" id="avg-rating">0.0</div>
-                        <div class="text-gray-600 text-sm">Avg Rating</div>
-                    </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                    <div class="text-3xl font-bold text-green-600" id="in-stock-count">0</div>
+                    <div class="text-gray-600">In Stock</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                    <div class="text-3xl font-bold text-blue-600" id="prime-count">0</div>
+                    <div class="text-gray-600">Prime Eligible</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                    <div class="text-3xl font-bold text-yellow-600" id="avg-price">$0</div>
+                    <div class="text-gray-600">Avg Price</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GitHub Products Loader Script -->
+    <!-- Amazon Disclosure -->
+    <section id="about" class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <i class="fab fa-amazon text-5xl text-yellow-400 mb-4"></i>
+                    <h2 class="text-3xl font-bold mb-4">Amazon Associates Program</h2>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl p-8 mb-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Your Store ID</h3>
+                            <div class="flex items-center space-x-4">
+                                <code class="bg-gray-900 text-yellow-300 px-4 py-3 rounded-lg text-lg font-mono">
+                                    beaubodylife-20
+                                </code>
+                                <span class="text-green-400">
+                                    <i class="fas fa-check-circle"></i> Active
+                                </span>
+                            </div>
+                        </div>
+                        <a href="https://affiliate-program.amazon.com" target="_blank" 
+                           class="mt-4 md:mt-0 amazon-btn px-6 py-3 rounded-lg font-bold">
+                            View Amazon Dashboard
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div class="bg-gray-700 p-6 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-400">Up to 10%</div>
+                            <div class="text-gray-300">Commission Rate</div>
+                        </div>
+                        <div class="bg-gray-700 p-6 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-400">24 Hours</div>
+                            <div class="text-gray-300">Cookie Duration</div>
+                        </div>
+                        <div class="bg-gray-700 p-6 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-400">Automatic</div>
+                            <div class="text-gray-300">Link Generation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-gray-300 text-center">
+                    As an Amazon Associate, we earn from qualifying purchases. When you click on our links 
+                    and make a purchase, we may receive a commission at no extra cost to you. 
+                    Thank you for supporting our site!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-pink-600 rounded-full"></div>
+                        <span class="font-bold text-gray-900">Beabodylife</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">Amazon Associates Store</p>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-gray-600">Store ID: <span class="font-mono">beaubodylife-20</span></p>
+                    <p class="text-sm text-gray-500 mt-1">
+                        Powered by GitHub • 
+                        <a href="https://github.com/mastalafwin69-art/beabodylife-products" 
+                           target="_blank" class="text-pink-600 hover:underline">
+                           View Repository
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
-        // Configuration
+        // CONFIGURATION
         const GITHUB_USERNAME = 'mastalafwin69-art';
         const REPO_NAME = 'beabodylife-products';
-        const PRODUCTS_JSON_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/products.json`;
-        
-        // Load and display products
+        const PRODUCTS_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/products/products.json`;
+        const AMAZON_TAG = 'beaubodylife-20';
+
+        // Load products from GitHub
         async function loadProducts() {
             try {
-                const response = await fetch(PRODUCTS_JSON_URL);
+                const response = await fetch(PRODUCTS_URL);
                 const data = await response.json();
                 
                 displayProducts(data.products);
                 updateStats(data.products);
+                
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('amazon-products').innerHTML = `
+                document.getElementById('products-container').innerHTML = `
                     <div class="col-span-4 text-center py-12">
                         <i class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Unable to Load Products</h3>
-                        <p class="text-gray-600 mb-4">Check your GitHub repository configuration.</p>
-                        <a href="https://github.com/mastalafwin69-art/beabodylife-products" target="_blank" class="inline-flex items-center bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition">
-                            <i class="fab fa-github mr-2"></i>
-                            Go to GitHub Repository
+                        <p class="text-gray-600 mb-4">Check your GitHub repository.</p>
+                        <a href="https://github.com/mastalafwin69-art/beabodylife-products" 
+                           target="_blank" 
+                           class="inline-block bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700">
+                           Go to GitHub Repository
                         </a>
                     </div>
                 `;
             }
         }
-        
+
         function displayProducts(products) {
-            const container = document.getElementById('amazon-products');
+            const container = document.getElementById('products-container');
             container.innerHTML = '';
             
             products.forEach(product => {
-                const productCard = createProductCard(product);
-                container.appendChild(productCard);
+                const card = createProductCard(product);
+                container.appendChild(card);
             });
         }
-        
+
         function createProductCard(product) {
             const card = document.createElement('div');
-            card.className = 'product-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300';
+            card.className = 'bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow';
             
             // Generate Amazon affiliate link
-            const affiliateUrl = `https://www.amazon.com/dp/${product.amazon_asin}?tag=${product.affiliate_tag || 'beabodylife-20'}`;
-            
-            // Generate star rating HTML
-            const starRating = generateStarRating(product.rating);
+            const affiliateLink = `https://www.amazon.com/dp/${product.amazon_asin}?tag=${AMAZON_TAG}`;
             
             card.innerHTML = `
-                <div class="relative">
-                    <img src="${product.image}" alt="${product.name}" 
-                         class="w-full h-48 object-cover" 
-                         loading="lazy"
-                         onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop'">
+                <div class="relative overflow-hidden">
+                    <img src="${product.image}" 
+                         alt="${product.name}" 
+                         class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
                     
+                    <!-- Badges -->
                     ${product.badge ? `
-                    <div class="absolute top-3 left-3 ${getBadgeColor(product.badge)} text-white text-xs font-bold px-2 py-1 rounded">
+                    <div class="absolute top-3 left-3 ${
+                        product.badge === 'Sale' ? 'bg-red-500' : 
+                        product.badge === 'New' ? 'bg-green-500' : 'bg-blue-500'
+                    } text-white text-xs font-bold px-2 py-1 rounded">
                         ${product.badge}
                     </div>` : ''}
                     
                     ${product.prime ? `
-                    <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+                    <div class="absolute top-3 right-3 prime-badge text-xs font-bold px-2 py-1 rounded">
                         <i class="fab fa-amazon mr-1"></i> Prime
                     </div>` : ''}
                     
@@ -152,52 +304,42 @@
                         </span>`}
                     </div>
                     
-                    <h4 class="font-semibold text-gray-900 mb-2 line-clamp-2" title="${product.name}">
-                        ${product.name}
-                    </h4>
+                    <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 h-12">${product.name}</h3>
                     
-                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-2 h-10">${product.description}</p>
                     
-                    <div class="flex items-center mb-3">
-                        <div class="star-rating mr-2">
-                            ${starRating}
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500 mr-2">
+                            ${generateStars(product.rating)}
                         </div>
-                        <span class="text-gray-600 text-sm">${product.rating}</span>
-                        <span class="text-gray-400 text-sm ml-2">(${product.reviews.toLocaleString()})</span>
+                        <span class="text-gray-600 text-sm">${product.rating} (${product.reviews})</span>
                     </div>
                     
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <span class="text-pink-600 font-bold text-lg">$${product.price.toFixed(2)}</span>
+                            <span class="text-xl font-bold text-gray-900">$${product.price.toFixed(2)}</span>
                             ${product.original_price ? `
-                            <span class="text-gray-400 text-sm line-through ml-2">$${product.original_price.toFixed(2)}</span>
+                            <span class="text-gray-400 line-through ml-2">$${product.original_price.toFixed(2)}</span>
                             ` : ''}
                         </div>
                     </div>
                     
-                    <div class="space-y-2">
-                        <a href="${affiliateUrl}" 
-                           target="_blank" 
-                           class="block w-full bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-semibold py-3 rounded-lg text-center transition"
-                           onclick="trackProductClick('${product.id}')">
-                            <i class="fab fa-amazon mr-2"></i> View on Amazon
-                        </a>
-                        
-                        <button onclick="showProductDetails('${product.id}')" 
-                                class="block w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg text-center transition">
-                            <i class="fas fa-info-circle mr-2"></i> Details
-                        </button>
-                    </div>
+                    <a href="${affiliateLink}" 
+                       target="_blank" 
+                       class="block w-full amazon-btn py-3 rounded-lg text-center font-bold hover:shadow-lg transition"
+                       onclick="trackClick('${product.id}')">
+                        <i class="fab fa-amazon mr-2"></i> View on Amazon
+                    </a>
                 </div>
             `;
             
             return card;
         }
-        
-        function generateStarRating(rating) {
+
+        function generateStars(rating) {
+            let stars = '';
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
-            let stars = '';
             
             for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
             if (hasHalfStar) stars += '<i class="fas fa-star-half-alt"></i>';
@@ -207,72 +349,36 @@
             
             return stars;
         }
-        
-        function getBadgeColor(badge) {
-            const colors = {
-                'Sale': 'bg-pink-600',
-                'New': 'bg-green-500',
-                'Bestseller': 'bg-orange-500',
-                'Limited': 'bg-purple-600'
-            };
-            return colors[badge] || 'bg-gray-600';
-        }
-        
+
         function updateStats(products) {
             document.getElementById('total-products').textContent = products.length;
-            document.getElementById('in-stock').textContent = products.filter(p => p.in_stock).length;
-            document.getElementById('prime-products').textContent = products.filter(p => p.prime).length;
+            document.getElementById('in-stock-count').textContent = products.filter(p => p.in_stock).length;
+            document.getElementById('prime-count').textContent = products.filter(p => p.prime).length;
             
-            const avgRating = products.reduce((sum, p) => sum + p.rating, 0) / products.length;
-            document.getElementById('avg-rating').textContent = avgRating.toFixed(1);
+            const avgPrice = products.reduce((sum, p) => sum + p.price, 0) / products.length;
+            document.getElementById('avg-price').textContent = '$' + avgPrice.toFixed(2);
         }
-        
-        function trackProductClick(productId) {
-            // Implement analytics tracking here
-            console.log(`Product clicked: ${productId}`);
-            
-            // Example: Google Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'select_item', {
-                    items: [{
-                        item_id: productId,
-                        item_name: productId
-                    }]
-                });
-            }
+
+        function trackClick(productId) {
+            console.log('Product clicked:', productId);
+            // Here you can add analytics tracking
         }
-        
-        function showProductDetails(productId) {
-            // Implement modal or details view
-            alert(`Product ID: ${productId}\nMore details coming soon!`);
+
+        function refreshProducts() {
+            document.getElementById('products-container').innerHTML = `
+                <div class="text-center py-12 col-span-4">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600 mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Refreshing products...</p>
+                </div>
+            `;
+            loadProducts();
         }
-        
+
         // Load products when page loads
         document.addEventListener('DOMContentLoaded', loadProducts);
+        
+        // Auto-refresh every 10 minutes
+        setInterval(refreshProducts, 600000);
     </script>
-
-    <!-- Add Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css">
-
-    <style>
-        /* Additional styles */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .product-card {
-            transition: all 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-
 </body>
 </html>
