@@ -33,3 +33,18 @@
     }
   ]
 }
+{
+  "id": "unique-id",
+  "name": "Product Name",
+  "category": "fitness/skincare/jewelry/watches",
+  "price": 49.99,
+  "original_price": 69.99,  // Optional
+  "rating": 4.5,
+  "reviews": 1000,
+  "image": "URL from Unsplash",
+  "amazon_asin": "B0XXXXXXXX",  // Amazon product ID
+  "description": "Product description",
+  "prime": true,
+  "in_stock": true,
+  "badge": "Sale/New/Bestseller"  // Optional
+}
