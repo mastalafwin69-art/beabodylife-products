@@ -1,53 +1,68 @@
 {
+  "last_updated": "2024-01-15",
+  "affiliate_tag": "beabodylife-20",
+  "currency": "USD",
   "products": [
     {
-      "id": "prod-001",
+      "id": "B08XYZ1234",
       "name": "Premium Yoga Mat - Non Slip Exercise Mat",
       "category": "fitness",
       "price": 49.99,
-      "originalPrice": 69.99,
+      "original_price": 69.99,
       "rating": 4.8,
       "reviews": 1245,
       "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=300&fit=crop",
-      "amazonUrl": "https://www.amazon.com/dp/B08XYZ1234",
-      "badge": "Sale",
-      "prime": true
+      "amazon_asin": "B08XYZ1234",
+      "description": "Extra thick yoga mat with non-slip surface. Perfect for all types of yoga and exercises.",
+      "features": ["6mm thickness", "Non-slip surface", "Easy to clean", "Includes carrying strap"],
+      "prime": true,
+      "in_stock": true,
+      "badge": "Sale"
     },
     {
-      "id": "prod-002",
+      "id": "B08ABC5678",
       "name": "Vitamin C Serum for Face - Anti Aging Serum",
       "category": "skincare",
       "price": 38.00,
       "rating": 4.9,
       "reviews": 2890,
       "image": "https://images.unsplash.com/photo-1556228578-9c360e1d4588?w=400&h=300&fit=crop",
-      "amazonUrl": "https://www.amazon.com/dp/B08ABC5678",
-      "badge": "New",
-      "prime": true
+      "amazon_asin": "B08ABC5678",
+      "description": "Powerful vitamin C serum for brightening and anti-aging. Suitable for all skin types.",
+      "features": ["20% Vitamin C", "Hyaluronic Acid", "Vitamin E", "Fragrance-free"],
+      "prime": true,
+      "in_stock": true,
+      "badge": "Bestseller"
     },
     {
-      "id": "prod-003",
+      "id": "B08DEF9012",
       "name": "14K Gold Pendant Necklace for Women",
       "category": "jewelry",
       "price": 89.00,
-      "originalPrice": 120.00,
+      "original_price": 120.00,
       "rating": 4.7,
       "reviews": 856,
-      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w-400&h=300&fit=crop",
-      "amazonUrl": "https://www.amazon.com/dp/B08DEF9012",
-      "badge": "Sale",
-      "prime": true
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=300&fit=crop",
+      "amazon_asin": "B08DEF9012",
+      "description": "Elegant 14K gold pendant necklace with diamond accent. Perfect for everyday wear.",
+      "features": ["14K Gold", "Diamond accent", "18-inch chain", "Gift box included"],
+      "prime": true,
+      "in_stock": true,
+      "badge": "Sale"
     },
     {
-      "id": "prod-004",
+      "id": "B08GHI3456",
       "name": "Smart Fitness Tracker Watch - Heart Rate Monitor",
       "category": "watches",
       "price": 249.00,
       "rating": 4.6,
       "reviews": 3120,
       "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop",
-      "amazonUrl": "https://www.amazon.com/dp/B08GHI3456",
-      "prime": true
+      "amazon_asin": "B08GHI3456",
+      "description": "Advanced fitness tracker with heart rate monitoring, GPS, and sleep tracking.",
+      "features": ["Heart rate monitor", "GPS tracking", "7-day battery", "Water resistant"],
+      "prime": true,
+      "in_stock": true
     }
   ]
 }
